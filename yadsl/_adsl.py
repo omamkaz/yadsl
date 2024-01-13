@@ -10,14 +10,14 @@ from urllib.parse import urljoin
 class Payload:
     username: str = "ctl00$ContentPlaceHolder1$loginframe$UserName"
     password: str = "ctl00$ContentPlaceHolder1$loginframe$Password"
-    login_btn: str = "ctl00$ContentPlaceHolder1$loginframe$LoginButton"
     captcha: str = "ctl00$ContentPlaceHolder1$capres"
+    login_btn: str = "ctl00$ContentPlaceHolder1$loginframe$LoginButton"
     captcha_btn: str = "ctl00$ContentPlaceHolder1$submitCaptch"
 
     def __init__(self, 
                  username: str = None, 
                  password: str = None,
-                 login_btn: str = None):
+                 login_btn: str = "Sign+In"):
 
         self._data = {}
         self._data[Payload.username] = username
@@ -26,18 +26,23 @@ class Payload:
 
     def set_username(self, username: str) -> None:
         self._data[Payload.username] = username
-    
+
     def set_password(self, password: str) -> None:
         self._data[Payload.password] = password
     
-    def set_login_btn(self, login_btn: str) -> None:
+    def set_login_btn(self, login_btn: str = "Sign+In") -> None:
         self._data[Payload.login_btn] = login_btn
 
-    def set_captcha(self, captcha: str, captcha_btn: str = 'مواصلة') -> None:
+    def set_login(self, username: str, password: str, login_btn: str = "Sign+In") -> None:
+        self.set_username(username)
+        self.set_password(password)
+        self.set_login_btn(login_btn)
+
+    def set_captcha(self, captcha: str, captcha_btn: str = "Submit") -> None:
         self._data[Payload.captcha] = captcha
         self._data[Payload.captcha_btn] = captcha_btn
 
-    def set_captcha_btn(self, captcha_btn: str = 'مواصلة') -> None:
+    def set_captcha_btn(self, captcha_btn: str = "Submit") -> None:
         self._data[Payload.captcha_btn] = captcha_btn
 
     def set(self, key: str, value: Any) -> None:
@@ -89,10 +94,13 @@ class YADSL:
         if cookies is not None:
             self.set_cookies(cookies)
 
-    def login(self, username: str = None, password: str = None) -> int:
+    def login(self, 
+              username: str = None, 
+              password: str = None) -> int:
+
         if username is not None:
             self._payload.set_username(username)
-        
+
         if password is not None:
             self._payload.set_password(password)
 
@@ -113,6 +121,9 @@ class YADSL:
                 _value = _input.attrs.get("value")
                 self._payload.set(_name, _value)
 
+        with open("index.html", "wb") as fw:
+            fw.write(_login_get.content)
+
         return _login_post.status_code
 
     def verify(self, captcha: str) -> int:
@@ -132,7 +143,7 @@ class YADSL:
         labels = _request_soup.find_all("td", class_="td_mc")
         values = _request_soup.find_all("span", attrs={"id": re.compile(r"ctl00_ContentPlaceHolder1_\d+")})
 
-        _data["name"] = name.split(":")[-1].strip()
+        _data[("الاسم" if self._lang.lower() == "ar" else "name")] = name.split(":")[-1].strip()
         _data.update({k.text.strip().lower(): v.text.strip().lower() for k, v in zip(labels, values)})
 
         return _data
