@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "yadsl"
+version = "0.0.1"
+description = ""
+authors = ["Osama Mohammed Al-zabidi <omamkaz@gmail.com>"]
+license = "GPL-3.0"
+readme = ["README.md", "CHANGELOG.md"]
+keywords = [
+    "yemen",
+    "adsl",
+    "internet",
+    "balance",
+    "check",
+    "web",
+    "scrape"
+]
+repository = "https://github.com/omamkaz/adsl"
+packages = [{ include = "lib" }]
+classifiers = [
+    "License :: OSI Approved :: GPL-3.0 License",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+
+[tool.poetry.dependencies]
+python = ">=3.10, <3.13"
+requests = "==2.31.0"
+beautifulsoup4 = "==4.11.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
