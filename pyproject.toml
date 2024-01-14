@@ -14,10 +14,9 @@ keywords = [
     "web",
     "scrape"
 ]
-repository = "https://github.com/omamkaz/adsl"
+repository = "https://github.com/omamkaz/yadsl"
 packages = [{ include = "lib" }]
 classifiers = [
-    "License :: OSI Approved :: GPL-3.0 License",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",

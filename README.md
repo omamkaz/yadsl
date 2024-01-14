@@ -1,13 +1,12 @@
 
 # Yemen Net ADSL Internet Info
 
-yadsl is a simple Python module to fetch data from [YemenNet ADSL](https://adsl.yemen.net.ye) offical website easly and ligindly
+yadsl is a simple Python module to easily fetch data from [YemenNet ADSL](https://adsl.yemen.net.ye) official website.
 
 ## Features
 
-- **easy to use** fetch data easly with python.
-- **cookies** import & export cookies, for long refresh time
-
+- **easy to use** fetch data easily with Python.
+- **cookies** import & export cookies, for long refresh time without captcha verify
 
 ## Installation
 
@@ -17,7 +16,6 @@ You can install **yadsl** via pip:
 pip install yadsl
 ```
 
-
 ## Usage
 
 ```python
@@ -25,9 +23,7 @@ from yadsl import YADSL
 
 yadsl = YADSL(
     user: str = "xxxxxx",
-    password: str = "...",
-    lang: str = "en",
-    cookies: dict = None,
+    password: str = "..."
 )
 
 yadsl.login()
@@ -35,7 +31,6 @@ yadsl.fetch_captcha()
 yadsl.verify(captcha: str = "xxxx")
 yadsl.fetch_data(cookies: dict = None)
 ```
-
 
 ## License
 
