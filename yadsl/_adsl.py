@@ -121,9 +121,6 @@ class YADSL:
                 _value = _input.attrs.get("value")
                 self._payload.set(_name, _value)
 
-        with open("index.html", "wb") as fw:
-            fw.write(_login_get.content)
-
         return _login_post.status_code
 
     def verify(self, captcha: str) -> int:
