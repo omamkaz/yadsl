@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "yadsl"
 version = "0.0.1"
-description = ""
+description = "yadsl is a simple Python module to easily fetch data from https://adsl.yemen.net.ye official website."
 authors = ["Osama Mohammed Al-zabidi <omamkaz@gmail.com>"]
 license = "GPL-3.0"
 readme = ["README.md", "CHANGELOG.md"]
