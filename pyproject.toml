@@ -12,10 +12,12 @@ keywords = [
     "balance",
     "check",
     "web",
-    "scrape"
+    "scrape",
+    "bs4",
+    "script"
 ]
 repository = "https://github.com/omamkaz/yadsl"
-packages = [{ include = "lib" }]
+packages = [{ include = "yadsl" }]
 classifiers = [
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
