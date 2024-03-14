@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 
 import io
+import argparse
 from yadsl import YADSL
 from PIL import Image
 
 
-def print_image_as_ascii(image_path, width=100):
+def print_image_as_ascii(image_path, width=100) -> None:
     image = Image.open(image_path)
     image = image.resize((width, int(width * image.height / image.width)))
 
@@ -28,13 +29,20 @@ def print_image_as_ascii(image_path, width=100):
         print(line)
 
 
-yd = YADSL(
-    username="xxxx",
-    password="xxxx"
-)
+def main() -> None:
+    parser = argparse.ArgumentParser(description='Authenticate user')
+    parser.add_argument('username', type=str, help='Username')
+    parser.add_argument('password', type=str, help='Password')
+    args = parser.parse_args()
 
-yd.login()
-print_image_as_ascii(io.BytesIO(yd.fetch_captcha()), 70)
-yd.verify(input("? Enter Captcha Number: ").strip())
-for k, v in yd.fetch_data().items():
-    print(k, v, sep=": ")
+    yd = YADSL(username=args.username, password=args.password)
+    yd.login()
+
+    print_image_as_ascii(io.BytesIO(yd.fetch_captcha()), 70)
+    yd.verify(input("? Enter Captcha Number: ").strip())
+
+    for k, v in yd.fetch_data().items():
+        print(k, v, sep=": ")
+
+if __name__ == "__main__":
+    main()
