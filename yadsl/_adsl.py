@@ -4,11 +4,9 @@ import re
 import requests
 from typing import Any
 from bs4 import BeautifulSoup
-from urllib.parse import urljoin
-
 
 class Payload:
-    username: str = "ctl00$ContentPlaceHolder1$loginframe$UserName"
+    username: str = "ctl00$ContentPlaceHolder1$lginframe$UserName"
     password: str = "ctl00$ContentPlaceHolder1$loginframe$Password"
     captcha: str = "ctl00$ContentPlaceHolder1$capres"
     login_btn: str = "ctl00$ContentPlaceHolder1$loginframe$LoginButton"
@@ -174,17 +172,13 @@ class YADSL:
         self._session.cookies.clear_expired_cookies()
 
     @property
-    def main_url(self) -> str:
-        return YADSL.URL
-
-    @property
     def _login_url(self) -> str:
-        return urljoin(self.main_url, f"{self._lang}/login.aspx")
+        return f"{YADSL.URL}/{self._lang}/login.aspx"
 
     @property
     def _user_url(self) -> str:
-        return urljoin(self.main_url, f"{self._lang}/user_main.aspx")
+        return f"{YADSL.URL}/{self._lang}/user_main.aspx"
 
     @property
     def _captcha_url(self) -> str:
-        return urljoin(self.main_url, "captcha/docap.aspx?new=1")
+        return f"{YADSL.URL}/captcha/docap.aspx?new=1"
