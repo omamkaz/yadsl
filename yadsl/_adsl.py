@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 
 
 class Payload:
-    username: str = "ctl00$ContentPlaceHolder1$lginframe$UserName"
+    username: str = "ctl00$ContentPlaceHolder1$loginframe$UserName"
     password: str = "ctl00$ContentPlaceHolder1$loginframe$Password"
     captcha: str = "ctl00$ContentPlaceHolder1$capres"
     login_btn: str = "ctl00$ContentPlaceHolder1$loginframe$LoginButton"
@@ -93,9 +93,7 @@ class YADSL:
         if cookies is not None:
             self.set_cookies(cookies)
 
-    def login(self, 
-              username: str = None, 
-              password: str = None) -> int:
+    def login(self, username: str = None, password: str = None) -> int:
 
         if username is not None:
             self._payload.set_username(username)
@@ -144,6 +142,9 @@ class YADSL:
 
         return _data
 
+    def fetch_captcha(self) -> bytes:
+        return self._session.get(self._captcha_url).content
+
     def auto_login(self, 
                    captcha: str,
                    username: str = None,
@@ -153,17 +154,14 @@ class YADSL:
         _verify_status_code = self.verify(captcha)
         return (_login_status_code, _verify_status_code)
 
-    def fetch_captcha(self) -> bytes:
-        return self._session.get(self._captcha_url).content
-
     def get_cookies(self) -> dict:
         return requests.utils.dict_from_cookiejar(self._session.cookies)
 
-    def export_cookies(self) -> dict:
-        return self.get_cookies()
-
     def set_cookies(self, cookies: dict):
         return self._session.cookies.update(requests.utils.cookiejar_from_dict(cookies))
+
+    def export_cookies(self) -> dict:
+        return self.get_cookies()
 
     def import_cookies(self, cookies: dict):
         return self.set_cookies(cookies)
@@ -174,12 +172,12 @@ class YADSL:
 
     @property
     def _login_url(self) -> str:
-        return f"{YADSL.URL}/{self._lang}/login.aspx"
+        return f"{self.URL}/{self._lang}/login.aspx"
 
     @property
     def _user_url(self) -> str:
-        return f"{YADSL.URL}/{self._lang}/user_main.aspx"
+        return f"{self.URL}/{self._lang}/user_main.aspx"
 
     @property
     def _captcha_url(self) -> str:
-        return f"{YADSL.URL}/captcha/docap.aspx?new=1"
+        return f"{self.URL}/captcha/docap.aspx?new=1"
