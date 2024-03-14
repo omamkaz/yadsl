@@ -36,10 +36,12 @@ def main() -> None:
     args = parser.parse_args()
 
     yd = YADSL(username=args.username, password=args.password)
-    yd.login()
+    print("Login: ", yd.login())
 
     print_image_as_ascii(io.BytesIO(yd.fetch_captcha()), 70)
-    yd.verify(input("? Enter Captcha Number: ").strip())
+
+    verify_code: str = input("? Enter Captcha Number: ").strip()
+    print("Verify: ", yd.verify(verify_code))
 
     for k, v in yd.fetch_data().items():
         print(k, v, sep=": ")
