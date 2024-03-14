@@ -5,6 +5,7 @@ import requests
 from typing import Any
 from bs4 import BeautifulSoup
 
+
 class Payload:
     username: str = "ctl00$ContentPlaceHolder1$lginframe$UserName"
     password: str = "ctl00$ContentPlaceHolder1$loginframe$Password"
