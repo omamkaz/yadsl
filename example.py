@@ -30,9 +30,9 @@ def print_image_as_ascii(image_path, width=100) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description='Authenticate user')
-    parser.add_argument('username', type=str, help='Username')
-    parser.add_argument('password', type=str, help='Password')
+    parser = argparse.ArgumentParser(description='Authenticate to Yemen Net ADSL Account Details')
+    parser.add_argument('username', type=str, help='Your Yemen Net ADSL Provider Username')
+    parser.add_argument('password', type=str, help='Your Yemen Net ADSL Provider Password')
     args = parser.parse_args()
 
     yd = YADSL(username=args.username, password=args.password)
