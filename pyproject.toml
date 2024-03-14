@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "yadsl"
-version = "0.0.1"
+version = "0.0.3"
 description = "yadsl is a simple Python module to easily fetch data from https://adsl.yemen.net.ye official website."
 authors = ["Osama Mohammed Al-zabidi <omamkaz@gmail.com>"]
 license = "GPL-3.0"
@@ -32,7 +32,7 @@ classifiers = [
 python = ">=3.7, <3.13"
 requests = "==2.31.0"
 beautifulsoup4 = "==4.11.1"
-
+argparse = "==1.4.0"
 
 [build-system]
 requires = ["poetry-core"]
